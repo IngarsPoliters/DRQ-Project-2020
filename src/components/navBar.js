@@ -36,9 +36,6 @@ export class NavBar extends React.Component {
                             </Nav>
                         </Collapse>
                     </Container>
-
-
-
                 </Navbar>
 
 

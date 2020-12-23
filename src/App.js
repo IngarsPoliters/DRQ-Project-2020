@@ -2,13 +2,14 @@ import './App.css';
 import { NavBar } from './components/navBar'
 import { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import FeedList from './components/feedList'
 
 class App extends Component {
   render(){
     return (
       <div className="App">
         <NavBar></NavBar>
-        <h1>Hello World</h1>
+        <FeedList></FeedList>
       </div>
     );
   }
