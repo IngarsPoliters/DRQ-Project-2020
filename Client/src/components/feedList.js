@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { v4 as uuidv4 } from 'uuid';
 import Card from 'react-bootstrap/Card';
 import { connect } from 'react-redux';
-import { getItems } from '../actions/itemActions';
+import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 
 class FeedList extends Component {
 
@@ -13,24 +13,18 @@ class FeedList extends Component {
         this.props.getItems();
     }
 
+    onDeleteClick = (id) => {
+        this.props.deleteItem(id);
+    }
+
+    
+
     render() {
         //destructuring. Pulling out items from this.state
         const { items } = this.props.item;
         return (
             <Container>
-                <Button className="mb-5"
-                    color="dark"
-                    style={{ marginBottom: '2rem' }}
-                    onClick={() => {
-                        const name = prompt('Enter Fish')
-                        if (name) {
-                            this.setState(state => ({
-                                items: [...state.items, { id: uuidv4(), name }]
-                            }));
-                        }
-                    }}
-                >Add Fish
-                </Button>
+                
 
                 <ListGroup>
                     <TransitionGroup className="feed-list">
@@ -48,11 +42,8 @@ class FeedList extends Component {
                                                 className="remove-btn"
                                                 color="danger"
                                                 size="sm"
-                                                onClick={() => {
-                                                    this.setState(state => ({
-                                                        items: state.items.filter(item => item.id !== id)
-                                                    }));
-                                                }}>&times;Delete
+                                                onClick={this.onDeleteClick.bind(this, id)}>
+                                                    &times;Delete
                                     </Button>
                                             
                                         </Card.Body>
@@ -77,4 +68,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default connect(mapStateToProps, {getItems})(FeedList);
+export default connect(mapStateToProps, {getItems, deleteItem})(FeedList);
