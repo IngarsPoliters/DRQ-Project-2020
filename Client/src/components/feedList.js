@@ -5,7 +5,6 @@ import Card from 'react-bootstrap/Card';
 import { connect } from 'react-redux';
 import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
-import { v4 as uuidv4 } from 'uuid';
 
 class FeedList extends Component {
 
@@ -24,19 +23,17 @@ class FeedList extends Component {
         const { items } = this.props.item;
         return (
             <Container>
-                
-
                 <ListGroup>
                     <TransitionGroup className="feed-list">
-                        {items.map(({ id, name }) => (
+                        {items.map(({ id, name, location, imgSrc }) => (
                             <CSSTransition key={id} timeout={500} classNames="fade">
                                 <ListGroupItem>
                                     <Card class="w-100 p-3">
-                                        <Card.Img class="w-25" variant="top" src="https://static.wikia.nocookie.net/pixar/images/a/aa/Nemo-FN.png/revision/latest?cb=20160710221104" />
+                                        <Card.Img class="w-25" variant="top" src={imgSrc} />
                                         <Card.Body>
                                             <Card.Title>{name}</Card.Title>
                                             <Card.Text>
-                                                Desciption
+                                                {location}
                                             </Card.Text>
                                             <Button
                                                 className="remove-btn"
@@ -45,7 +42,6 @@ class FeedList extends Component {
                                                 onClick={this.onDeleteClick.bind(this, id)}>
                                                     &times;Delete
                                     </Button>
-                                            
                                         </Card.Body>
                                     </Card>
                                 </ListGroupItem>

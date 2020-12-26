@@ -3,10 +3,10 @@ import { GET_ITEMS, ADD_ITEM, DELETE_ITEM } from '../actions/types';
 
 const initialState = {
     items: [
-        { id: uuidv4(), name: 'Fish' },
-        { id: uuidv4(), name: 'Nemo' },
-        { id: uuidv4(), name: 'Dory' },
-        { id: uuidv4(), name: 'Shark' }
+        { id: uuidv4(), name: 'Fish', location: "Ocean", imgSrc: "" },
+        { id: uuidv4(), name: 'Nemo', location: "Pacific Ocean", imgSrc: "https://static.wikia.nocookie.net/pixar/images/a/aa/Nemo-FN.png/revision/latest?cb=20160710221104" },
+        { id: uuidv4(), name: 'Dory', location: "Pacific Ocean", imgSrc: ""  },
+        { id: uuidv4(), name: 'Shark', location: "Pacific Ocean", imgSrc: ""  }
     ]
 };
 
