@@ -2,19 +2,20 @@ import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { v4 as uuidv4 } from 'uuid';
+import Card from 'react-bootstrap/Card';
+import { connect } from 'react-redux';
+import { getItems } from '../actions/itemActions';
+import PropTypes from 'prop-types';
 
 class FeedList extends Component {
-    state = {
-        items: [
-            { id: uuidv4(), name: 'Fish' },
-            { id: uuidv4(), name: 'Nemo' },
-            { id: uuidv4(), name: 'Dory' }
-        ]
+
+    componentDidMount(){
+        this.props.getItems();
     }
 
     render() {
         //destructuring. Pulling out items from this.state
-        const { items } = this.state;
+        const { items } = this.props.item;
         return (
             <Container>
                 <Button className="mb-5"
@@ -36,17 +37,26 @@ class FeedList extends Component {
                         {items.map(({ id, name }) => (
                             <CSSTransition key={id} timeout={500} classNames="fade">
                                 <ListGroupItem>
-                                    <Button
-                                        className="remove-btn"
-                                        color="danger"
-                                        size="sm"
-                                        onClick={() => {
-                                            this.setState(state => ({
-                                                items: state.items.filter(item => item.id !== id)
-                                            }));
-                                        }}>&times;
+                                    <Card class="w-100 p-3">
+                                        <Card.Img class="w-25" variant="top" src="https://static.wikia.nocookie.net/pixar/images/a/aa/Nemo-FN.png/revision/latest?cb=20160710221104" />
+                                        <Card.Body>
+                                            <Card.Title>{name}</Card.Title>
+                                            <Card.Text>
+                                                Desciption
+                                            </Card.Text>
+                                            <Button
+                                                className="remove-btn"
+                                                color="danger"
+                                                size="sm"
+                                                onClick={() => {
+                                                    this.setState(state => ({
+                                                        items: state.items.filter(item => item.id !== id)
+                                                    }));
+                                                }}>&times;Delete
                                     </Button>
-                                    {name}
+                                            
+                                        </Card.Body>
+                                    </Card>
                                 </ListGroupItem>
                             </CSSTransition>
                         ))}
@@ -55,10 +65,16 @@ class FeedList extends Component {
             </Container>
         );
     }
-
-
-
-
 }
 
-export default FeedList;
+FeedList.propTypes = {
+    getItems: PropTypes.func.isRequired,
+    item: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    item: state.item
+});
+
+
+export default connect(mapStateToProps, {getItems})(FeedList);
