@@ -9,14 +9,13 @@ import PropTypes from 'prop-types';
 class FeedList extends Component {
 
     componentDidMount(){
-        this.props.getItems();
+        this.props.getItems()
     }
 
     onDeleteClick = (id) => {
         this.props.deleteItem(id);
     }
-
-    
+   
 
     render() {
         //destructuring. Pulling out items from this.state
@@ -25,11 +24,13 @@ class FeedList extends Component {
             <Container>
                 <ListGroup>
                     <TransitionGroup className="feed-list">
-                        {items.map(({ id, name, location, imgSrc }) => (
-                            <CSSTransition key={id} timeout={500} classNames="fade">
+                        {items.map(({ _id, name, location, imgSrc }) => (
+                            <CSSTransition key={_id} timeout={500} classNames="fade">
                                 <ListGroupItem>
                                     <Card class="w-100 p-3">
-                                        <Card.Img class="w-25" variant="top" src={imgSrc} />
+                                        <Card.Img class="w-25" variant="top" src={imgSrc}>
+                                            
+                                        </Card.Img>
                                         <Card.Body>
                                             <Card.Title>{name}</Card.Title>
                                             <Card.Text>
@@ -39,7 +40,7 @@ class FeedList extends Component {
                                                 className="remove-btn"
                                                 color="danger"
                                                 size="sm"
-                                                onClick={this.onDeleteClick.bind(this, id)}>
+                                                onClick={this.onDeleteClick.bind(this, _id)}>
                                                     &times;Delete
                                     </Button>
                                         </Card.Body>

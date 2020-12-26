@@ -5,15 +5,16 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
-import { v4 as uuidv4 } from 'uuid';
+
 
 class ItemModal extends Component {
     state = {
         modal: false, // represents if the modal is open or not
         name: '',
-        location: ''
+        location: '',
+        imgSrc: ''
     }
-
+    
     toggle = () => {
         this.setState({
             modal: !this.state.modal
@@ -21,14 +22,15 @@ class ItemModal extends Component {
     }
 
     onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value, [e.target.location]: e.target.value }); // [6] 19.56
+        this.setState({ [e.target.name]: e.target.value, 
+            [e.target.location]: e.target.value, 
+            [e.target.imgSrc]: e.target.value });    // [6] 19.56
     }
 
     onSubmit = (e) => {
         e.preventDefault();
 
         const newItem = {
-            id: uuidv4(),
             name: this.state.name,
             location: this.state.location,
             imgSrc: this.state.imgSrc

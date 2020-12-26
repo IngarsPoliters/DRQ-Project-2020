@@ -2,10 +2,18 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Create Schema
-const ItemSchema = new Schema ({
+const ItemSchema = new Schema({
     name: {
         type: String,
         required: true
+    },
+    location: {
+        type: String,
+        required: true
+    },
+    imgSrc: {
+        type: String, 
+        required:true
     },
     date: {
         type: Date,

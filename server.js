@@ -11,8 +11,8 @@ app.use(bodyParser.json());
 
 
 // Connect to mongoose
-const connectionString = 'mongodb+srv://admin:admin@cluster1.5lmjq.mongodb.net/fishes?retryWrites=true&w=majority'
-mongoose.connect(connectionString, { useNewUrlParser: true } )
+const connectionString = 'mongodb+srv://admin:admin@cluster1.5lmjq.mongodb.net/fish?retryWrites=true&w=majority'
+mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true } )
     .then(() => console.log("MongoDB Connected"))
     .catch(error => console.log(error))
 
