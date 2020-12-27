@@ -12,8 +12,7 @@ const ItemSchema = new Schema({
         required: true
     },
     imgSrc: {
-        type: String, 
-        required:true
+        type: String
     },
     date: {
         type: Date,

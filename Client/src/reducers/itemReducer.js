@@ -1,8 +1,5 @@
-import { v4 as uuidv4 } from 'uuid';
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, LOADING_FISH } from '../actions/types';
+import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, LOADING_FISH, EDIT_ITEM } from '../actions/types';
 
-
-const nemoPic = "https://static.wikia.nocookie.net/pixar/images/a/aa/Nemo-FN.png/revision/latest?cb=20160710221104"
 const initialState = {
     items: [],
     loading: false
@@ -22,6 +19,11 @@ export default function (state = initialState, action) {
                 items: state.items.filter(item => item._id !== action.payload)
             };
         case ADD_ITEM:
+            return {
+                ...state,
+                items: [action.payload, ...state.items]
+            }
+        case EDIT_ITEM:
             return {
                 ...state,
                 items: [action.payload, ...state.items]

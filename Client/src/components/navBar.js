@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, NavbarBrand, Container } from 'reactstrap';
 import icon from '../icon/user.png';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 
 
 

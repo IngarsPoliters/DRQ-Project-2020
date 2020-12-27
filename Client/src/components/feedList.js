@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
-import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
+import { Container, ListGroup, ListGroupItem, Button, Row, Col } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Card from 'react-bootstrap/Card';
 import { connect } from 'react-redux';
 import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
+import EditModal from './editModal';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 class FeedList extends Component {
 
-    componentDidMount(){
-        this.props.getItems()
-    }
 
     onDeleteClick = (id) => {
         this.props.deleteItem(id);
     }
-   
+
+    componentDidMount() {
+        this.props.getItems()
+    }
+
 
     render() {
         //destructuring. Pulling out items from this.state
@@ -28,21 +31,36 @@ class FeedList extends Component {
                             <CSSTransition key={_id} timeout={500} classNames="fade">
                                 <ListGroupItem>
                                     <Card class="w-100 p-3">
-                                        <Card.Img class="w-25" variant="top" src={imgSrc}>
-                                            
+                                        <Card.Img class="w-50 ml-auto" variant="top" src={imgSrc}>
+
                                         </Card.Img>
                                         <Card.Body>
                                             <Card.Title>{name}</Card.Title>
                                             <Card.Text>
                                                 {location}
                                             </Card.Text>
-                                            <Button
-                                                className="remove-btn"
-                                                color="danger"
-                                                size="sm"
-                                                onClick={this.onDeleteClick.bind(this, _id)}>
-                                                    &times;Delete
-                                    </Button>
+                                            <Container >
+                                                <Row>
+                                                    <Col>
+                                                    <Router>
+                                                        <Link to={"/edit/" + _id} className="btn btn-primary">
+                                                            Edit Fish
+                                                    </Link>
+                                                            <Switch>
+                                                                <Route path={'/edit/:id'} component={EditModal} />
+                                                            </Switch>
+                                                        </Router>
+                                                    </Col>
+                                                    <Col>
+                                                        <Button block
+                                                            className="remove-btn"
+                                                            color="danger"
+                                                            onClick={this.onDeleteClick.bind(this, _id)}>
+                                                            &times;Delete
+                                                        </Button>
+                                                    </Col>
+                                                </Row>
+                                            </Container>
                                         </Card.Body>
                                     </Card>
                                 </ListGroupItem>
@@ -51,6 +69,7 @@ class FeedList extends Component {
                     </TransitionGroup>
                 </ListGroup>
             </Container>
+
         );
     }
 }
@@ -65,4 +84,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default connect(mapStateToProps, {getItems, deleteItem})(FeedList);
+export default connect(mapStateToProps, { getItems, deleteItem })(FeedList);

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, LOADING_FISH } from './types';
+import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, LOADING_FISH, EDIT_ITEM } from './types';
 
 
 export const getItems = () => dispatch => {// using thunk to make an async request
@@ -26,6 +26,13 @@ export const deleteItem = (id) => dispatch => {
         type: DELETE_ITEM,
         payload: id
     }))
+};
+export const editItem = (item) => dispatch => {
+    axios.post(`/api/items/${item._id}`, item)
+        .then(res => dispatch({
+            type: EDIT_ITEM,
+            payload: res.data
+        }))
 };
 
 export const setFishLoading = () => {
