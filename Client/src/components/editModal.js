@@ -8,15 +8,16 @@ import { editItem } from '../actions/itemActions';
 import axios from 'axios';
 
 class EditModal extends Component {
-constructor() {
-    super()
+    constructor() {
+        super()
 
-    this.state = {
-        name: '',
-        location: '',
-        imgSrc: ''
+        this.state = {
+            name: '',
+            location: '',
+            imgSrc: '',
+            desc: ''
+        }
     }
-}
 
     componentDidMount() {
         this.toggle();
@@ -28,14 +29,15 @@ constructor() {
                     _id: response.data._id,
                     name: response.data.name,
                     location: response.data.location,
-                    imgSrc: response.data.imgSrc
+                    imgSrc: response.data.imgSrc,
+                    desc: response.data.desc
                 })
             })
-            .catch((error) =>{
+            .catch((error) => {
                 console.log(error);
             })
     }
-    
+
     toggle = () => {
         this.setState({
             modal: !this.state.modal
@@ -46,7 +48,8 @@ constructor() {
         this.setState({
             [e.target.name]: e.target.value,
             [e.target.location]: e.target.value,
-            [e.target.imgSrc]: e.target.value
+            [e.target.imgSrc]: e.target.value,
+            [e.target.desc]: e.target.desc
         });    // [6] 19.56
     }
 
@@ -57,6 +60,7 @@ constructor() {
             name: this.state.name,
             location: this.state.location,
             imgSrc: this.state.imgSrc,
+            desc: this.state.desc,
             _id: this.state._id
         }
         console.log(newItem);
@@ -73,7 +77,7 @@ constructor() {
     render() {
         return (
             <div>
-                
+
 
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle} $>Edit Fish</ModalHeader>
@@ -93,6 +97,10 @@ constructor() {
                                 <Input type="text" name="imgSrc" id="item"
                                     value={this.state.imgSrc} onChange={this.onChange} > </Input>
 
+                                <Label for="item">Fish Description</Label>
+                                <Input type="textarea" name="desc" id="item"
+                                    value={this.state.desc} onChange={this.onChange} > </Input>
+
 
                                 <Button color="dark" style={{ marginTop: '2rem' }} block>
                                     Submit</Button>
@@ -109,4 +117,4 @@ const mapStateToProps = state => ({
     item: state.item
 })
 
-export default connect(mapStateToProps, {editItem})(EditModal)
+export default connect(mapStateToProps, { editItem })(EditModal)

@@ -14,6 +14,9 @@ const ItemSchema = new Schema({
     imgSrc: {
         type: String
     },
+    desc: {
+        type: String
+    },
     date: {
         type: Date,
         default: Date.now

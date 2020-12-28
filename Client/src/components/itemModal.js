@@ -12,9 +12,10 @@ class ItemModal extends Component {
         modal: false, // represents if the modal is open or not
         name: '',
         location: '',
-        imgSrc: ''
+        imgSrc: '',
+        desc: ''
     }
-    
+
     toggle = () => {
         this.setState({
             modal: !this.state.modal
@@ -22,9 +23,12 @@ class ItemModal extends Component {
     }
 
     onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value, 
-            [e.target.location]: e.target.value, 
-            [e.target.imgSrc]: e.target.value });    // [6] 19.56
+        this.setState({
+            [e.target.name]: e.target.value,
+            [e.target.location]: e.target.value,
+            [e.target.imgSrc]: e.target.value,
+            [e.target.desc]: e.target.value
+        });    // [6] 19.56
     }
 
     onSubmit = (e) => {
@@ -33,7 +37,8 @@ class ItemModal extends Component {
         const newItem = {
             name: this.state.name,
             location: this.state.location,
-            imgSrc: this.state.imgSrc
+            imgSrc: this.state.imgSrc,
+            desc: this.state.desc
         }
         //Add item via addItem Action
         this.props.addItem(newItem);
@@ -66,6 +71,10 @@ class ItemModal extends Component {
                                 <Label for="item">Fish Image</Label>
                                 <Input type="text" name="imgSrc" id="item"
                                     placeholder="Enter fish image source link" onChange={this.onChange} > </Input>
+
+                                <Label for="item">Fish Description</Label>
+                                <Input type="textarea" name="desc" id="item"
+                                    placeholder="Enter fish description" onChange={this.onChange} > </Input>
 
 
                                 <Button color="dark" style={{ marginTop: '2rem' }} block>

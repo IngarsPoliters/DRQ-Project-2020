@@ -20,7 +20,8 @@ router.post('/', (req, res) => {
     const newItem = new Item({
         name: req.body.name,
         location: req.body.location,
-        imgSrc: req.body.imgSrc
+        imgSrc: req.body.imgSrc,
+        desc: req.body.desc
     });
     newItem.save()
         .then(item => res.json(item));
