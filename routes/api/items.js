@@ -49,17 +49,13 @@ router.get('/:id', (req, res) => {
 // @route   Update api.items/:id
 // @desc    Edit An Item
 // @access  Public
-router.put('/:id', (req,res) => {
+router.post('/:id', (req,res) => {
     console.log("Update Item: "+ req.params.id);
     //Find the Item and update with the item Id, updates the existing item with new item information
     Item.findByIdAndUpdate(req.params.id, req.body, {new: true},)
         .then(item => res.json(item))
-        .catch(error => res.status(404).json({success: false}))
+        .catch(error => console.log(error))
         })
-
-
-
-
-
+       // res.status(404).json({success: false})
 
 module.exports = router;

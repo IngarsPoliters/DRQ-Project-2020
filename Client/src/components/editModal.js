@@ -59,9 +59,13 @@ constructor() {
             imgSrc: this.state.imgSrc,
             _id: this.state._id
         }
+        console.log(newItem);
         //Add item via addItem Action
         this.props.editItem(newItem);
-
+        //return back to home page after edit is submitted
+        this.props.history.push('/');
+        //reloads the page on submit. as the componentDidMount only works once during lifecycle
+        window.location.reload(true);
         // Close Modal
         this.toggle();
     }

@@ -20,6 +20,8 @@ class FeedList extends Component {
     }
 
 
+
+
     render() {
         //destructuring. Pulling out items from this.state
         const { items } = this.props.item;
@@ -42,10 +44,10 @@ class FeedList extends Component {
                                             <Container >
                                                 <Row>
                                                     <Col>
-                                                    <Router>
-                                                        <Link to={"/edit/" + _id} className="btn btn-primary">
-                                                            Edit Fish
-                                                    </Link>
+                                                        <Router>
+                                                            <Link to={"/edit/" + _id} className="btn btn-primary">
+                                                                Edit Fish
+                                                        </Link>
                                                             <Switch>
                                                                 <Route path={'/edit/:id'} component={EditModal} />
                                                             </Switch>
