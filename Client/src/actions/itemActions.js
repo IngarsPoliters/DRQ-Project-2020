@@ -8,12 +8,12 @@ export const getItems = () => dispatch => {// using thunk to make an async reque
     axios
         .get('/api/items')
         .then(res => dispatch({
-            type: GET_ITEMS,
-            payload: res.data
+            type: GET_ITEMS, // sending type
+            payload: res.data// sending data payload
         }))
 };
 
-export const addItem = (item) => dispatch => {
+export const addItem = (item) => dispatch => { // adding items to mongodb
     axios.post('/api/items', item)
         .then(res => dispatch({
             type: ADD_ITEM,
@@ -21,13 +21,13 @@ export const addItem = (item) => dispatch => {
         }))
 };
 
-export const deleteItem = (id) => dispatch => {
+export const deleteItem = (id) => dispatch => { // deleting items from mongodb
     axios.delete(`/api/items/${id}`).then(res => dispatch({
         type: DELETE_ITEM,
         payload: id
     }))
 };
-export const editItem = (item) => dispatch => {
+export const editItem = (item) => dispatch => { // editing items to mongodb
     axios.post(`/api/items/${item._id}`, item)
         .then(res => dispatch({
             type: EDIT_ITEM,

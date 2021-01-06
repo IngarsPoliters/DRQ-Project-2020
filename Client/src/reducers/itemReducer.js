@@ -4,16 +4,16 @@ const initialState = {
     items: [],
     loading: false
 };
-
+// action types
 export default function (state = initialState, action) {
     switch (action.type) {
         case GET_ITEMS:
             return {
-                ...state,
-                items: action.payload,
+                ...state, // making a copy of the current state
+                items: action.payload,// getting items from the payload 
                 loading: false//set loading back to false 
             }
-        case DELETE_ITEM:
+        case DELETE_ITEM: 
             return {
                 ...state,
                 items: state.items.filter(item => item._id !== action.payload)

@@ -11,7 +11,7 @@ class EditModal extends Component {
     constructor() {
         super()
 
-        this.state = {
+        this.state = { // item state
             name: '',
             location: '',
             imgSrc: '',
@@ -19,13 +19,13 @@ class EditModal extends Component {
         }
     }
 
-    componentDidMount() {
-        this.toggle();
-        console.log(this.props.match.params.id);
-        axios.get(`http://localhost:5000/api/items/${this.props.match.params.id}`)
+    componentDidMount() { // component lifcycle hook
+        this.toggle();// togles the modal to edit item
+        console.log(this.props.match.params.id); 
+        axios.get(`http://localhost:5000/api/items/${this.props.match.params.id}`) // getting the item of that id
             .then(response => {
                 console.log(response);
-                this.setState({
+                this.setState({ // setting the state of the requested item
                     _id: response.data._id,
                     name: response.data.name,
                     location: response.data.location,
@@ -38,24 +38,24 @@ class EditModal extends Component {
             })
     }
 
-    toggle = () => {
+    toggle = () => { // toggling modal state
         this.setState({
             modal: !this.state.modal
         });
     }
 
-    onChange = (e) => {
+    onChange = (e) => {// On each input set the state of vars 
         this.setState({
             [e.target.name]: e.target.value,
             [e.target.location]: e.target.value,
             [e.target.imgSrc]: e.target.value,
             [e.target.desc]: e.target.desc
-        });    // [6] 19.56
+        });    
     }
 
-    onSubmit = (e) => {
+    onSubmit = (e) => {// on submit takes the input state 
         e.preventDefault();
-
+        // assinging state variables to newItem obj 
         const newItem = {
             name: this.state.name,
             location: this.state.location,
@@ -77,8 +77,6 @@ class EditModal extends Component {
     render() {
         return (
             <div>
-
-
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle} $>Edit Fish</ModalHeader>
                     <ModalBody>
@@ -100,7 +98,6 @@ class EditModal extends Component {
                                 <Label for="item">Fish Description</Label>
                                 <Input type="textarea" name="desc" id="item"
                                     value={this.state.desc} onChange={this.onChange} > </Input>
-
 
                                 <Button color="dark" style={{ marginTop: '2rem' }} block>
                                     Submit</Button>

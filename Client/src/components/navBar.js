@@ -10,12 +10,12 @@ import icon from '../icon/user.png';
 export class NavBar extends React.Component {
     //Added a navbar component to route through the different components
     state = {
-        isOpen: false // stack [3] 20.35min
+        isOpen: false // set to false by default
     }
 
-    toggle = () => {
-        this.setState({
-            isOpen: !this.state.isOpen
+    toggle = () => { // NavbarToggler calls this method 
+        this.setState({ // makes the page responsive
+            isOpen: !this.state.isOpen // if the screen is small, navbar is collapsed and provides the hamburger menu 
         });
     }
     render() {

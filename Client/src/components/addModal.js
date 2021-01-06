@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
 
 
-class ItemModal extends Component {
-    state = {
+class AddModal extends Component {
+    state = { // item state - modal , name, location, image source and description
         modal: false, // represents if the modal is open or not
         name: '',
         location: '',
@@ -16,24 +16,24 @@ class ItemModal extends Component {
         desc: ''
     }
 
-    toggle = () => {
+    toggle = () => {// toggles the itemModal state
         this.setState({
             modal: !this.state.modal
         });
     }
 
-    onChange = (e) => {
+    onChange = (e) => {// On each input set the state of vars 
         this.setState({
             [e.target.name]: e.target.value,
             [e.target.location]: e.target.value,
             [e.target.imgSrc]: e.target.value,
             [e.target.desc]: e.target.value
-        });    // [6] 19.56
+        });  
     }
 
-    onSubmit = (e) => {
+    onSubmit = (e) => {// on submit takes the input state 
         e.preventDefault();
-
+        // assinging state variables to newItem obj 
         const newItem = {
             name: this.state.name,
             location: this.state.location,
@@ -53,7 +53,7 @@ class ItemModal extends Component {
             <div>
                 <Button color="dark" style={{ marginBottom: '2rem' }}
                     onClick={this.toggle}>Add Fish</Button>
-
+                
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle} $>Add To Fish List</ModalHeader>
                     <ModalBody>
@@ -93,4 +93,4 @@ const mapStateToProps = state => ({
     item: state.item
 })
 
-export default connect(mapStateToProps, { addItem })(ItemModal);
+export default connect(mapStateToProps, { addItem })(AddModal);

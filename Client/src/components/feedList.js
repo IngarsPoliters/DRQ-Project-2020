@@ -9,11 +9,11 @@ import EditModal from './editModal';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 class FeedList extends Component {
-    onDeleteClick = (id) => {
+    onDeleteClick = (id) => { // on delete clikc will delete the item matching that id
         this.props.deleteItem(id);
     }
 
-    componentDidMount() {
+    componentDidMount() { // component lifecycle hook
         this.props.getItems()
     }
 
@@ -40,7 +40,7 @@ class FeedList extends Component {
                                                         {desc}
                                                     </Card.Text>
                                                 </Col>
-                                                <Card.Img class="w-50 ml-auto" variant="top" src={imgSrc} />
+                                                <Card.Img class="w-50 h-50 ml-auto" variant="top" src={imgSrc} />
                                             </Row>
                                         </Card.Body>
                                         <Card.Body>
@@ -81,9 +81,8 @@ FeedList.propTypes = {
     item: PropTypes.object.isRequired
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({// allows me to get the state from redux into react component
     item: state.item
 });
-
 
 export default connect(mapStateToProps, { getItems, deleteItem })(FeedList);
